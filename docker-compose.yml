@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  # 1. SERVIÇO DO BACK-END (Spring Boot 21)
+  api:
+    build:
+      context: ./backEnd
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/meu_banco
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=123
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    volumes:
+      - ./backEnd/uploads:/app/uploads # Persistência para fotos/arquivos de upload
+    depends_on:
+      db:
+        condition: service_healthy # Só inicia após o Postgres dar sinal verde
+
+  # 2. SERVIÇO DO FRONT-END (HTML/CSS/JS com Nginx)
+  web:
+    build:
+      context: ./frontEnd
+      dockerfile: Dockerfile
+    ports:
+      - "80:80" # Você acessará o site apenas digitando http://localhost no navegador
+    volumes:
+      - ./frontEnd:/usr/share/nginx/html # Permite editar o HTML/JS e ver alteração na hora (Hot Reload nativo)
+    depends_on:
+      - api
+
+  # 3. BANCO DE DADOS (PostgreSQL)
+  db:
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: meu_banco
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d meu_banco"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:

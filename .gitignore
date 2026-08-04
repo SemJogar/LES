@@ -1,0 +1,23 @@
+# Compilação do Java / Maven
+target/
+*.class
+*.jar
+*.war
+
+# Arquivos temporários e logs
+*.log
+.mvn/wrapper/maven-wrapper.jar
+
+# Configurações de IDEs (VS Code, Eclipse, IntelliJ, Sublime)
+.settings/
+.classpath
+.project
+.vscode/
+.idea/
+*.iml
+*.sublime-project
+*.sublime-workspace
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db
