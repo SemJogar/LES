@@ -13,6 +13,7 @@ import app.service.LivroService;
 @RestController
 @RequestMapping("/livros")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:5173")
 public class LivroController {
 
     private final LivroService livroService;
@@ -22,6 +23,13 @@ public class LivroController {
         LivroResponse novoLivro = livroService.criarLivro(dto);
         // Retorna o status HTTP 201 (Created) junto com os dados do livro salvos
         return ResponseEntity.status(HttpStatus.CREATED).body(novoLivro);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<LivroResponse> visualizar(@PathVariable Integer id) {
+        // O service busca e já devolve o LivroResponse (DTO)
+        LivroResponse livro = livroService.visualizarLivro(id);
+        return ResponseEntity.ok(livro);
     }
 
     @PutMapping("/{id}")

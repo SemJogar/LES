@@ -34,18 +34,9 @@ public class Cliente {
 	@Column(name = "cli_cpf", length = 11)
 	private String cpf;
 
-	@Column(name = "cli_email", length = 40)
-	private String email;
-
-	@Column(name = "cli_senha", length = 30)
-	private String senha;
-
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "cli_end_id")
 	private Endereco endereco;
-
-	@Column(name = "cli_rank")
-	private Integer rank;
 
 	// o mappedBy = "cliente" da linha abaixo se refere ao private Cliente cliente de Endereco
 	// o CascadeType.REMOVE é para deletar todos os enderecos relacionados, caso cliente seja excluido
@@ -56,12 +47,15 @@ public class Cliente {
 	// @OneToMany(mappedBy = "cliente", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	// private List<Endereco> enderecos;
 	
-	@OneToMany(mappedBy = "cliente", cascade = CascadeType.REMOVE, orphanRemoval = true)
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Telefone> telefones;
 
-	@OneToMany(mappedBy = "cliente", cascade = CascadeType.REMOVE, orphanRemoval = true)
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Cartao> cartoes;
 
-	@OneToMany(mappedBy = "cliente", cascade = CascadeType.REMOVE, orphanRemoval = true)
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Compra> compras;
+
+	@OneToOne(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Perfil perfil;
 }

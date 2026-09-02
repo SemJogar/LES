@@ -1,0 +1,1 @@
+ALTER TABLE paises ALTER COLUMN pai_iso TYPE VARCHAR(2);

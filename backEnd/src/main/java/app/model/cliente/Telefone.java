@@ -17,13 +17,13 @@ public class Telefone{
 	private Integer id;
 
 	@Column(name = "tel_tp", length = 2)
-	private Integer tp;
+	private String tp;
 
 	@Column(name = "tel_ddd", length = 2)
-	private Integer ddd;
+	private String ddd;
 
 	@Column(name = "tel_num", length = 9)
-	private Integer num;
+	private String numero;
 
 	@ManyToOne
 	@JoinColumn(name = "tel_cli_id")

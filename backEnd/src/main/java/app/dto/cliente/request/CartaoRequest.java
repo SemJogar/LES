@@ -3,13 +3,16 @@ package app.dto.cliente.request;
 import jakarta.validation.constraints.*;
 import java.util.List;
 
-import app.dto.cliente.request.BandeiraRequest;
-import app.dto.cliente.request.ClienteRequest;
-
 public record CartaoRequest(
+    @NotBlank
+    @Size(min = 16, max = 16)
     String numero,
+    @NotBlank
+    @Size(max = 100)
     String nome,
+    @NotBlank
+    @Size(min = 4, max = 4)
     String codigo,
-    Integer banderiaId,
-    ClienteRequest cliente
+    @NotNull
+    Integer bandeiraId
 ) {}

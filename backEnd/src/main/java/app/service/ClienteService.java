@@ -12,45 +12,46 @@ import app.dto.cliente.response.ClienteResponse;
 
 @Service
 @RequiredArgsConstructor
-public class ClienteService{
+public class ClienteService {
+
     private final ClienteMapper clienteMapper;
     private final ClienteRepository clienteRepository;
 
     @Transactional
-    public ClienteResponse CadastrarCliente(ClienteRequest dto){
-
+    public ClienteResponse cadastrarCliente(ClienteRequest dto) {
+        // 1. O Mapper converte o DTO, cria os Proxies para FKs e vincula os relacionamentos bidirecionais
         Cliente clienteEntity = clienteMapper.requestToCliente(dto);
 
+        // 2. O Spring Data JPA persiste a árvore inteira de entidades (Cliente, Endereço, Cartões, Perfil)
         Cliente clienteSalvo = clienteRepository.save(clienteEntity);
 
+        // 3. Converte o resultado para DTO de Resposta
         return clienteMapper.clienteToResponse(clienteSalvo);
     }
 
-    @Transactional
-    public ClienteResponse EditarCliente(Integer id, ClienteRequest dto){
-
+    @Transactional(readOnly = true)
+    public ClienteResponse visualizarCliente(Integer id) {
         Cliente clienteEntity = clienteRepository.findById(id)
-            //Exception
+            .orElseThrow(() -> new RuntimeException("Cliente não encontrado com o ID: " + id));
+        return clienteMapper.clienteToResponse(clienteEntity);
+    }
+
+    @Transactional
+    public ClienteResponse editarCliente(Integer id, ClienteRequest dto) {
+        Cliente clienteEntity = clienteRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Cliente não encontrado com o ID: " + id));
 
-        //Nesse caso o Mapper recebe as informações do dto
-        //ve em quais lugares mudou
-        //e altera as informações dentro da entidade
-        // nos lugares correspondentes
-        clienteMapper.atualizarCliente(dto, clienteEntity);
-
+        clienteMapper.atualizarCliente(clienteEntity, dto);
         Cliente clienteSalvo = clienteRepository.save(clienteEntity);
 
         return clienteMapper.clienteToResponse(clienteSalvo);
     }
 
     @Transactional
-    public void ExcluirCliente(Integer id, ClienteRequest dto){
-
+    public void deletarCliente(Integer id) {
         Cliente clienteEntity = clienteRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Cliente não encontrado com o ID: " + id));
 
         clienteRepository.delete(clienteEntity);
     }
-    
 }

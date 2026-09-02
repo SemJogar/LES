@@ -8,6 +8,5 @@ public record TelefoneResponse(
     Integer id,
     String tp,
     String ddd,
-    String numero,
-    ClienteResponse cliente
+    String numero
 ) {}

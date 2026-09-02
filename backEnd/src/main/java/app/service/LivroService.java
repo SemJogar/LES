@@ -60,6 +60,12 @@ public class LivroService {
         return livroMapper.livroToResponse(livroSalvo);
     }
 
+    public LivroResponse visualizarLivro(Integer id) {
+        Livro livroEntity = livroRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Livro não encontrado com o ID: " + id));
+        return livroMapper.livroToResponse(livroEntity);
+    }
+    
     @Transactional
     public LivroResponse editarLivro(Integer id, LivroRequest dto) {
         Livro livroExistente = livroRepository.findById(id)

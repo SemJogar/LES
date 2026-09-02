@@ -3,7 +3,6 @@ package app.dto.livro.request;
 import jakarta.validation.constraints.*;
 import jakarta.validation.Valid;
 
-import app.dto.livro.request.CategoriaRequest;
 import app.dto.livro.request.DimensaoRequest;
 import app.dto.livro.request.PrecificacaoRequest;
 import app.dto.livro.request.ImagemRequest;
@@ -22,8 +21,10 @@ public record LivroRequest(
     String isbn,
     Integer qtPag,
     String sinopse,
+    @NotNull(message = "As dimensões do livro são obrigatórias")
     @Valid
     DimensaoRequest dimensao,
+    @NotNull(message = "A precificação é obrigatória")
     @Valid
     PrecificacaoRequest precificacao,
     @Valid

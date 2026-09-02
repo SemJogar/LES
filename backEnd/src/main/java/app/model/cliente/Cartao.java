@@ -17,13 +17,13 @@ public class Cartao{
 	private Integer id;
 
 	@Column(name = "car_numero")
-	private Long numero;
+	private String numero;
 
 	@Column(name = "car_nome")
 	private String nome;
 
 	@Column(name = "car_codigo")
-	private Integer codigo;
+	private String codigo;
 
 	// No caso não usamos nenhuma propriedade do cascade
 	// pois o objeto bandeira já está previamento salvo no banco 

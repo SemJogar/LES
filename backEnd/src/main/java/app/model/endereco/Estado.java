@@ -22,7 +22,7 @@ public class Estado {
 	@Column(name = "est_nome", length = 100)
 	private String nome;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "est_pai_id")
 	private	Pais pais;
 }

@@ -1,0 +1,1 @@
+ALTER TABLE estados ALTER COLUMN est_iso TYPE VARCHAR(2);

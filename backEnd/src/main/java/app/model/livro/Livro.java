@@ -56,11 +56,11 @@ public class Livro {
     @Column(name = "liv_cod_barras", length = 13) // Geralmente EAN-13 usa 13 dígitos
     private String codBarras;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "liv_pre_id")
     private Precificacao precificacao;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "liv_dim_id")
     private Dimensao dimensao;
 

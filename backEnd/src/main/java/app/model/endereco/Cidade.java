@@ -19,7 +19,7 @@ public class Cidade {
 	@Column(name = "cid_nome", length = 100)
 	private String nome;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "cid_est_id")
 	private	Estado estado;
 }

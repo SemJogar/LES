@@ -1,0 +1,1 @@
+ALTER TABLE livros ALTER COLUMN liv_qt_pag TYPE INTEGER;
