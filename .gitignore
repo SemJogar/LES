@@ -1,23 +1,27 @@
-# Compilação do Java / Maven
-target/
-*.class
-*.jar
-*.war
+# Arquivos de Ambiente / Segredos
+.env*
 
-# Arquivos temporários e logs
-*.log
-.mvn/wrapper/maven-wrapper.jar
-
-# Configurações de IDEs (VS Code, Eclipse, IntelliJ, Sublime)
+# IDEs gerais (VS Code, Eclipse, IntelliJ, Sublime)
 .settings/
 .classpath
 .project
+.factorypath
 .vscode/
 .idea/
 *.iml
+*.iws
+*.ipr
 *.sublime-project
 *.sublime-workspace
+.apt_generated
+.springBeans
+.sts4-cache
 
-# Arquivos do sistema operacional
+# Frontend (Next / Node)
+.next/
+node_modules/
+
+# Sistema Operacional e Logs
 .DS_Store
 Thumbs.db
+*.log

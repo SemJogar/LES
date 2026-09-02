@@ -1,52 +1,96 @@
-version: '3.8'
-
 services:
-  # 1. SERVIÇO DO BACK-END (Spring Boot 21)
+  # 1. MOTOR DE BUSCA (Typesense)
+  typesense:
+    image: typesense/typesense:27.1
+    container_name: typesense
+    ports:
+      - "8108:8108"
+    environment:
+      - TYPESENSE_DATA_DIR=/data
+      - TYPESENSE_API_KEY=1234
+    volumes:
+      - ./typesense-data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "bash -c 'cat < /dev/null > /dev/tcp/127.0.0.1/8108'"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  # 2. BACK-END (Spring Boot)
   api:
+    container_name: back_LES
     build:
       context: ./backEnd
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/meu_banco
-      - SPRING_DATASOURCE_USERNAME=admin
-      - SPRING_DATASOURCE_PASSWORD=123
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      # Conexão com o Banco de Dados (Corrigido)
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=1234
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=none
+      # Conexão com o Typesense
+      - TYPESENSE_HOST=typesense
+      - TYPESENSE_PORT=8108
+      - TYPESENSE_PROTOCOL=http
+      - TYPESENSE_API_KEY=1234
     volumes:
-      - ./backEnd/uploads:/app/uploads # Persistência para fotos/arquivos de upload
+      - ./backEnd/uploads:/app/uploads
     depends_on:
       db:
-        condition: service_healthy # Só inicia após o Postgres dar sinal verde
+        condition: service_healthy
+      typesense:
+        condition: service_healthy
+        
+  # 3. FRONT-END (Nginx)
+  # web:
+  #   build:
+  #     context: ./frontEnd
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "80:80"
+  #   volumes:
+  #     - ./frontEnd:/usr/share/nginx/html
+  #   depends_on:
+  #     - api
 
-  # 2. SERVIÇO DO FRONT-END (HTML/CSS/JS com Nginx)
-  web:
-    build:
-      context: ./frontEnd
-      dockerfile: Dockerfile
-    ports:
-      - "80:80" # Você acessará o site apenas digitando http://localhost no navegador
-    volumes:
-      - ./frontEnd:/usr/share/nginx/html # Permite editar o HTML/JS e ver alteração na hora (Hot Reload nativo)
-    depends_on:
-      - api
+  # 2. SERVIÇO DO FRONT-END (Next.js em modo Dev)
+  # web:
+  #   build:
+  #     context: ./frontEnd
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "3000:3000" # Porta padrão do Next.js
+  #   environment:
+  #     - NODE_ENV=development
+  #   volumes:
+  #     - ./frontEnd:/app
+  #     - /app/node_modules # Evita sobrescrever as dependências do container
+  #   command: npm run dev
+  #   depends_on:
+  #     - api
 
-  # 3. BANCO DE DADOS (PostgreSQL)
+# 4. BANCO DE DADOS (PostgreSQL)
   db:
-    image: postgres:15-alpine
+    container_name: db_LES
+    image: postgres:latest
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: 123
-      POSTGRES_DB: meu_banco
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      #no do serviço ficou como 123
+      POSTGRES_DB: postgres
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql 
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U admin -d meu_banco"]
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
       interval: 5s
       timeout: 5s
       retries: 5
+      start_period: 10s
 
 volumes:
   postgres_data:
