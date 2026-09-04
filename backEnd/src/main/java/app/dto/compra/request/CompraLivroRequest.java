@@ -7,7 +7,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public record CompraLivroRequest(
-    Integer compraId,
     Integer livroId,
     Short quantidade,
     BigDecimal valor

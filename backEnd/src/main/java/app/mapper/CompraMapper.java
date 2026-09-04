@@ -3,6 +3,7 @@ package app.mapper;
 import app.dto.compra.request.CompraRequest;
 import app.dto.compra.request.CompraLivroRequest;
 import app.dto.compra.response.CompraResponse;
+import app.dto.compra.response.CompraLivroResponse;
 import app.model.compra.Compra;
 import app.model.compra.CompraLivro;
 import app.model.compra.CupomUso;
@@ -35,6 +36,10 @@ public abstract class CompraMapper {
     @Mapping(target = "clienteId", source = "cliente.id")
     @Mapping(target = "compraLivro", source = "itens") // Mapeia 'itens' da Entidade de volta para 'compraLivro' do DTO
     public abstract CompraResponse compraToResponse(Compra compra);
+
+    @Mapping(target = "compraId", source = "compra.id")
+    @Mapping(target = "livroId", source = "livro.id")
+    public abstract CompraLivroResponse compraLivroToResponse(CompraLivro item);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "cliente", source = "clienteId", qualifiedByName = "mapClienteProxy")
