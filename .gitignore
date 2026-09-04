@@ -1,6 +1,9 @@
 # Arquivos de Ambiente / Segredos
 .env*
 
+# Anotações
+TODO.md
+
 # IDEs gerais (VS Code, Eclipse, IntelliJ, Sublime)
 .settings/
 .classpath
