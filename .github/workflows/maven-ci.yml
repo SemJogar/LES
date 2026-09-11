@@ -1,0 +1,51 @@
+name: Java CI com Maven e PostgreSQL
+
+on:
+  push:
+    branches: [ "master", "feat/crud-compras" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    # Sobe o container do PostgreSQL para o Spring e Flyway conseguirem conectar
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_DB: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: '1234'
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+    - name: Checkout do código
+      uses: actions/checkout@v4
+
+    # Configuração do Java 21 conforme definido no seu pom.xml
+    - name: Configurar JDK 21
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+        cache: maven
+
+    # Garante a permissão de execução do wrapper no Linux
+    - name: Tornar o mvnw executável
+      run: chmod +x mvnw
+
+    # Compila e roda os testes usando o Maven Wrapper
+    - name: Compilar e Rodar Testes com Maven Wrapper
+      run: ./mvnw test
+      env:
+        SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/postgres
+        SPRING_DATASOURCE_USERNAME: postgres
+        SPRING_DATASOURCE_PASSWORD: '1234'
