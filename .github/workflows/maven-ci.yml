@@ -3,8 +3,13 @@ name: Java CI com Maven e PostgreSQL
 on:
   push:
     branches: [ "master", "feat/crud-compras" ]
+    paths:
+      - 'backEnd/**'
+      - '.github/workflows/maven-ci.yml'
   pull_request:
     branches: [ "master" ]
+    paths:
+      - 'backEnd/**'
 
 jobs:
   build:
@@ -37,13 +42,16 @@ jobs:
         java-version: '21'
         distribution: 'temurin'
         cache: maven
+        cache-dependency-path: 'backEnd/pom.xml' # Aponta onde está o pom.xml para o cache funcionar
 
-    # Garante a permissão de execução do wrapper no Linux
+    # Garante permissão de execução do mvnw dentro da pasta backEnd
     - name: Tornar o mvnw executável
+      working-directory: ./backEnd
       run: chmod +x mvnw
 
-    # Compila e roda os testes usando o Maven Wrapper
+    # Compila e roda os testes entrando na pasta backEnd
     - name: Compilar e Rodar Testes com Maven Wrapper
+      working-directory: ./backEnd
       run: ./mvnw test
       env:
         SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/postgres
