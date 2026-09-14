@@ -1,0 +1,88 @@
+
+        body{
+            margin: 0;        
+        }
+       header{
+            background-color: rgba(89, 24, 24, 0.825);
+            height: 50px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        header figure{
+            margin: 0;
+        }
+
+        header figure img{
+            width: 60px;   
+            height: 60px;  
+        }
+       a{
+        color: white;
+       }
+            body {
+            background-color: #f8f9fa; 
+        }
+        #chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        #chat-window {
+            display: none; 
+            width: 300px;
+            height: 400px;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            margin-bottom: 10px;
+            flex-direction: column;
+        }
+        .chat-header {
+            background: #ffc107;
+            padding: 10px;
+            border-radius: 10px 10px 0 0;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+        }
+        .chat-body {
+            flex-grow: 1;
+            padding: 10px;
+            overflow-y: auto;
+        }
+        #btn-chatbot {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 30px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        .chat-footer {
+        padding: 10px;
+        border-top: 1px solid #eee;
+        display: flex;
+        background: #fff;
+        border-radius: 0 0 10px 10px;
+    }
+    #chat-input {
+        flex-grow: 1;
+        border: 1px solid #ddd;
+        border-radius: 5px 0 0 5px;
+        padding: 5px 10px;
+        outline: none;
+    }
+    #btn-enviar-chat {
+        border: none;
+        background: #ffc107;
+        color: #000;
+        padding: 5px 15px;
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+    }
+        
+       

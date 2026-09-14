@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-br">
+    <head>
+        <title> Gerenciar Trocas - Admin </title>
+        <meta charset="utf-8">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="../css/style.css">
+    </head>
+    <body>
+        <header>
+            <figure><img src="../img/logo.jpg" alt=""></figure>
+            <nav>
+                <a href="inicio.html">Inicio</a>
+                <a href="admin-painel.html">Voltar ao Painel</a>
+            </nav>
+        </header>
+        
+     <div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-danger fw-bold">Gerenciamento de Trocas</h2>
+        <span class="badge bg-dark">Painel Administrativo</span>
+    </div>
+
+    <div id="lista-trocas-admin" class="row g-4">
+    </div>
+</div>
+
+<div class="modal fade" id="modalJustificativa" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">Recusar Solicitação de Troca</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Informe ao cliente o motivo da recusa:</p>
+                <textarea id="txtJustificativa" class="form-control" rows="4" placeholder="Ex: Produto fora do prazo de 7 dias ou com marcas de uso."></textarea>
+                <input type="hidden" id="idTrocaAtual">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" onclick="confirmarRecusa()" class="btn btn-danger">Confirmar Recusa</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <script type="module" src="../js/admin-trocas.js"></script>
+    </body>
+</html>
