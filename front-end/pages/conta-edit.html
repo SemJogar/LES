@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="pt-br">
+    <head>
+        <title> Perfil </title>
+        <meta charset="utf-8">
+       
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../css/style.css">
+    </head>
+    <body>
+        <header>
+         <figure>
+            <img src="../img/logo.jpg" alt="">
+        </figure>   
+        <nav>
+            <a href="inicio.html">Inicio</a>
+            <a href="livro.html">Catalogo</a>
+            <a href="carrinho.html">Carrinho</a>
+            <a href="conta.html">Conta</a>
+            </nav>
+    </header>
+    <div class="container mt-5">
+    <div class="row g-4">
+        <!-- REUTILIZANDO A SIDEBAR PARA CONSISTÊNCIA -->
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm p-3">
+                <div class="list-group list-group-flush">
+                    <a href="conta.html" class="list-group-item list-group-item-action border-0 py-3 rounded">
+                        <i class="bi bi-person fs-4 me-3 text-warning"></i> Meu Perfil
+                    </a>
+                    <a href="historico.html" class="list-group-item list-group-item-action border-0 py-3 rounded">
+                        <i class="bi bi-bag-heart fs-4 me-3 text-warning"></i> Meus Pedidos
+                    </a>
+                    <a href="enderecos.html" class="list-group-item list-group-item-action border-0 py-3 rounded">
+                        <i class="bi bi-geo-alt fs-4 me-3 text-warning"></i> Endereços
+                    </a>
+                    <a href="cartoes.html" class="list-group-item list-group-item-action border-0 py-3 rounded">
+                        <i class="bi bi-credit-card fs-4 me-3 text-warning"></i> Cartões
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- FORMULÁRIO DE EDIÇÃO EM 2 COLUNAS -->
+        <div class="col-md-9">
+            <div class="card border-0 shadow-sm p-5">
+                <form id="formEditarConta">
+                    <h2 class="fw-bold mb-4">Editar Perfil</h2>
+                    
+                    <div class="row">
+                        <!-- Seção Dados Pessoais -->
+                        <div class="col-md-6 mb-3">
+                            <label for="nome" class="form-label small fw-bold">Nome</label>
+                            <input type="text" id="nome" class="form-control" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="sobrenome" class="form-label small fw-bold">Sobrenome</label>
+                            <input type="text" id="sobrenome" class="form-control" required>
+                        </div>
+                        
+                        <div class="col-md-8 mb-3">
+                            <label for="email" class="form-label small fw-bold">E-mail</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="genero" class="form-label small fw-bold">Gênero</label>
+                            <select id="genero" class="form-control" required>
+                                <option value="masculino">Masculino</option>
+                                <option value="feminino">Feminino</option>
+                                <option value="outro">Outro</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="dt_nascimento" class="form-label small fw-bold">Data de Nascimento</label>
+                            <input type="date" id="dt_nascimento" class="form-control" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="cpf" class="form-label small fw-bold">CPF</label>
+                            <input type="text" id="cpf" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+                    
+                    <!-- Seção Segurança -->
+                    <h5 class="fw-bold mb-3">Alterar Senha</h5>
+                    <p class="text-muted small">Preencha apenas se desejar mudar sua senha atual.</p>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="senha" class="form-label small fw-bold">Nova Senha</label>
+                            <input type="password" id="senha" class="form-control" placeholder="••••••••">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="confirmar_senha" class="form-label small fw-bold">Confirmar Senha</label>
+                            <input type="password" id="confirmar_senha" class="form-control" placeholder="••••••••">
+                        </div>
+                    </div>
+
+                    <div class="d-flex gap-3 mt-4">
+                        <button type="submit" id="btnSalvar" class="btn btn-warning px-5 rounded-pill fw-bold">
+                            Salvar Alterações
+                        </button>
+                        <a href="conta.html" class="btn btn-outline-secondary px-5 rounded-pill">
+                            Cancelar
+                        </a>
+                    </div>
+
+                    <!-- Zona de Risco -->
+                    <div class="mt-5 pt-4 border-top">
+                        <button type="button" id="btnDeletarConta" class="btn btn-link text-danger text-decoration-none p-0 small">
+                            <i class="bi bi-exclamation-triangle"></i> Inativar Conta
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <script type="module" src="../js/conta-edit.js"></script>
+    </body>
+</html>

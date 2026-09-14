@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="pt-br">
+    <head>
+        <title> Meus Endereços </title>
+        <meta charset="utf-8">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="../css/style.css">
+    </head>
+    <body>
+        <header>
+            <figure><img src="../img/logo.jpg" alt=""></figure>
+            <nav>
+                <a href="inicio.html">Inicio</a>
+                <a href="carrinho.html">Carrinho</a>
+                <a href="conta.html">Conta</a>
+            </nav>
+        </header>
+
+        <div class="container mt-5">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>Meus Endereços</h2>
+                <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#modalEndereco">
+                    + Novo Endereço
+                </button>
+            </div>
+
+            <div id="lista-enderecos" class="row mt-4 g-3">
+                <!-- Preenchido via JS -->
+            </div>
+        </div>
+
+        <!-- Modal para Cadastrar Endereço -->
+        <div class="modal fade" id="modalEndereco" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Novo Endereço</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="formEndereco">
+                            <input type="text" id="logradouro" class="form-control mb-2" placeholder="Rua/Avenida" required>
+                            <div class="row">
+                                <div class="col-4">
+                                    <input type="text" id="numero" class="form-control mb-2" placeholder="Nº" required>
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" id="bairro" class="form-control mb-2" placeholder="Bairro" required>
+                                </div>
+                            </div>
+                            <input type="text" id="cidade" class="form-control mb-2" placeholder="Cidade" required>
+                            <input type="text" id="cep" class="form-control mb-2" placeholder="CEP" maxlength="8" required>
+                            <button type="submit" class="btn btn-warning w-100 mt-3">Salvar Endereço</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script type="module" src="../js/enderecos.js"></script>
+    </body>
+</html>

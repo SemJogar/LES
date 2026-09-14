@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <title>Finalizar Compra</title>
+    <meta charset="utf-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <figure><img src="../img/logo.jpg" alt=""></figure>
+        <nav><a href="carrinho.html">Voltar ao Carrinho</a></nav>
+    </header>
+
+    <div class="container mt-5">
+    <h2 class="fw-bold mb-4">Finalizar Pedido</h2>
+    <div class="row g-5">
+        <!-- COLUNA ESQUERDA: Configuração do Pedido -->
+        <div class="col-md-8">
+            <!-- 1. ITENS -->
+            <div class="card border-0 shadow-sm p-4 mb-4">
+                <h5 class="fw-bold mb-3"><i class="bi bi-1-circle-fill text-warning me-2"></i> Revisão dos Itens</h5>
+                <div id="lista-itens-checkout"></div>
+            </div>
+
+            <!-- 2. ENTREGA + FRETE -->
+            <div class="card border-0 shadow-sm p-4 mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="fw-bold mb-0"><i class="bi bi-2-circle-fill text-warning me-2"></i> Entrega</h5>
+                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalNovoEndereco">+ Novo Endereço</button>
+                </div>
+                <div id="selecao-endereco" class="row g-2 mb-3">
+                    <!-- Endereços salvos carregarão aqui como cards selecionáveis -->
+                </div>
+                <div class="bg-light p-3 rounded">
+                    <label class="small fw-bold mb-2">Simular Frete (CEP)</label>
+                    <div class="input-group" style="width: 250px;">
+                        <input type="text" id="cep-frete" class="form-control" placeholder="00000-000">
+                        <button onclick="calcularFrete()" class="btn btn-dark">Calcular</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. PAGAMENTO -->
+            <div class="card border-0 shadow-sm p-4 mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="fw-bold mb-0"><i class="bi bi-3-circle-fill text-warning me-2"></i> Pagamento</h5>
+                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalNovoCartao">+ Novo Cartão</button>
+                </div>
+                <div id="selecao-cartao" class="row g-2">
+                    <!-- Cartões salvos carregarão aqui -->
+                </div>
+            </div>
+        </div>
+
+        <!-- COLUNA DIREITA: Resumo Fixo -->
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm p-4 sticky-top" style="top: 20px;">
+                <h5 class="fw-bold mb-4">Resumo da Compra</h5>
+                
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Subtotal:</span>
+                    <span id="resumo-subtotal">R$ 0,00</span>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                    <span>Frete:</span>
+                    <span id="resumo-frete" class="text-success">Calcule o CEP</span>
+                </div>
+                <div class="d-flex justify-content-between mb-2 text-danger d-none" id="area-cupom">
+                    <span>Cupom:</span>
+                    <span id="resumo-cupom">- R$ 0,00</span>
+                </div>
+                
+                <hr>
+                <div class="input-group mb-3">
+                    <input type="text" id="cod-cupom" class="form-control form-control-sm" placeholder="Cupom de Troca">
+                    <button onclick="aplicarCupom()" class="btn btn-sm btn-outline-dark">Aplicar</button>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <span class="fs-5 fw-bold">Total:</span>
+                    <span class="fs-4 fw-bold text-success" id="resumo-total">R$ 0,00</span>
+                </div>
+
+                <button onclick="finalizarPedido()" class="btn btn-warning w-100 py-3 rounded-pill fw-bold shadow-sm">
+                    CONFIRMAR PEDIDO
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL NOVO CARTÃO (Simplificado) -->
+<div class="modal fade" id="modalNovoCartao" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold">Novo Cartão</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Formulário rápido de cartão -->
+                <input type="text" class="form-control mb-2" placeholder="Número do Cartão">
+                <input type="text" class="form-control mb-2" placeholder="Nome Impresso">
+                <div class="row">
+                    <div class="col-6"><input type="text" class="form-control" placeholder="MM/AA"></div>
+                    <div class="col-6"><input type="text" class="form-control" placeholder="CVV"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-warning w-100 rounded-pill">Salvar e Usar</button>
+            </div>
+        </div>
+    </div>
+</div>
+    <script type="module" src="../js/checkout.js"></script>
+</body>
+</html>

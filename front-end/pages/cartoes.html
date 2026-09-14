@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pt-br">
+    <head>
+        <title> Gerenciar Cartões </title>
+        <meta charset="utf-8">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="../css/style.css">
+    </head>
+    <body>
+        <header>
+            <figure><img src="../img/logo.jpg" alt=""></figure>
+            <nav>
+                <a href="inicio.html">Inicio</a>
+                <a href="conta.html">Voltar ao Perfil</a>
+            </nav>
+        </header>
+
+        <div class="container mt-5">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>Meus Cartões</h2>
+                <a href="cartoes-create.html" class="btn btn-warning">
+                    + Registrar Novo Cartão
+                </a>
+            </div>
+
+            <div id="lista-cartoes" class="row mt-4 g-3">
+            </div>
+        </div>
+
+        <script type="module" src="../js/cartoes.js"></script>
+    </body>
+</html>
